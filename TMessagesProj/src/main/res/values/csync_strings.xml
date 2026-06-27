@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="csync_app_name">C-Sync</string>
+
+    <string name="csync_registration">C-Sync Registration</string>
+
+    <string name="csync_waiting">Waiting for Approval</string>
+
+    <string name="csync_student">Student</string>
+
+    <string name="csync_faculty">Faculty</string>
+
+    <string name="csync_hod">HoD</string>
+
+    <string name="csync_parent">Parent</string>
+
+    <string name="csync_guest">Guest</string>
+
+    <string name="csync_alumni">Alumni</string>
+
+    <string name="csync_developer">Developer</string>
+
+</resources>
