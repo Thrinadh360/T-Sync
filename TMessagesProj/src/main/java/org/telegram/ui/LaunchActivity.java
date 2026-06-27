@@ -7,7 +7,8 @@
  */
 
 package org.telegram.ui;
-
+import org.telegram.csync.auth.CSyncSessionManager;
+import org.telegram.csync.ui.auth.CSyncRegistrationActivity;
 import static org.telegram.messenger.AndroidUtilities.dp;
 import static org.telegram.messenger.AndroidUtilities.replaceSingleLinkBold;
 import static org.telegram.messenger.LocaleController.formatPluralString;
@@ -590,9 +591,18 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
             if (!UserConfig.getInstance(currentAccount).isClientActivated()) {
                 actionBarLayout.addFragmentToStack(getClientNotActivatedFragment());
             } else {
-                MainTabsActivity mainTabsActivity = new MainTabsActivity();
-                actionBarLayout.addFragmentToStack(mainTabsActivity);
-            }
+
+    if (CSyncSessionManager.isRegistered(this)) {
+
+        MainTabsActivity mainTabsActivity = new MainTabsActivity();
+        actionBarLayout.addFragmentToStack(mainTabsActivity);
+
+    } else {
+
+        actionBarLayout.addFragmentToStack(new CSyncRegistrationActivity());
+
+    }
+}
 
             try {
                 if (savedInstanceState != null) {
