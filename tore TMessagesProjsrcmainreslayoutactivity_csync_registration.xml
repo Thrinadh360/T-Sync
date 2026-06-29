@@ -1,0 +1,100 @@
+[1mdiff --git a/TMessagesProj/src/main/res/layout/activity_csync_registration.xml b/TMessagesProj/src/main/res/layout/activity_csync_registration.xml[m
+[1mindex 2d47d7472..bb98308f4 100644[m
+[1m--- a/TMessagesProj/src/main/res/layout/activity_csync_registration.xml[m
+[1m+++ b/TMessagesProj/src/main/res/layout/activity_csync_registration.xml[m
+[36m@@ -1,5 +1,91 @@[m
+ <?xml version="1.0" encoding="utf-8"?>[m
+ [m
+[31m-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"[m
+[32m+[m[32m<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"[m
+     android:layout_width="match_parent"[m
+[31m-    android:layout_height="match_parent"/>[m
+\ No newline at end of file[m
+[32m+[m[32m    android:layout_height="match_parent">[m
+[32m+[m
+[32m+[m[32m    <LinearLayout[m
+[32m+[m[32m        android:layout_width="match_parent"[m
+[32m+[m[32m        android:layout_height="wrap_content"[m
+[32m+[m[32m        android:orientation="vertical"[m
+[32m+[m[32m        android:padding="24dp">[m
+[32m+[m
+[32m+[m[32m        <TextView[m
+[32m+[m[32m            android:id="@+id/txtTitle"[m
+[32m+[m[32m            android:layout_width="wrap_content"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:text="C-SYNC"[m
+[32m+[m[32m            android:textSize="30sp"[m
+[32m+[m[32m            android:textStyle="bold"[m
+[32m+[m[32m            android:layout_gravity="center_horizontal"/>[m
+[32m+[m
+[32m+[m[32m        <TextView[m
+[32m+[m[32m            android:layout_width="wrap_content"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:text="Complete your college profile"[m
+[32m+[m[32m            android:layout_marginTop="8dp"[m
+[32m+[m[32m            android:layout_marginBottom="24dp"[m
+[32m+[m[32m            android:layout_gravity="center_horizontal"/>[m
+[32m+[m
+[32m+[m[32m        <ImageView[m
+[32m+[m[32m            android:id="@+id/imgProfile"[m
+[32m+[m[32m            android:layout_width="120dp"[m
+[32m+[m[32m            android:layout_height="120dp"[m
+[32m+[m[32m            android:layout_gravity="center_horizontal"[m
+[32m+[m[32m            android:src="@android:drawable/ic_menu_camera"/>[m
+[32m+[m
+[32m+[m[32m        <Button[m
+[32m+[m[32m            android:id="@+id/btnPhoto"[m
+[32m+[m[32m            android:layout_width="wrap_content"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:text="Capture Photo"[m
+[32m+[m[32m            android:layout_gravity="center_horizontal"[m
+[32m+[m[32m            android:layout_marginTop="12dp"/>[m
+[32m+[m
+[32m+[m[32m        <EditText[m
+[32m+[m[32m            android:id="@+id/etName"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:hint="Full Name"[m
+[32m+[m[32m            android:layout_marginTop="24dp"/>[m
+[32m+[m
+[32m+[m[32m        <EditText[m
+[32m+[m[32m            android:id="@+id/etPhone"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:hint="Telegram Phone"[m
+[32m+[m[32m            android:enabled="false"/>[m
+[32m+[m
+[32m+[m[32m        <Spinner[m
+[32m+[m[32m            android:id="@+id/spRole"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:layout_marginTop="12dp"/>[m
+[32m+[m
+[32m+[m[32m        <Spinner[m
+[32m+[m[32m            android:id="@+id/spDepartment"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"/>[m
+[32m+[m
+[32m+[m[32m        <EditText[m
+[32m+[m[32m            android:id="@+id/etStudentId"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:hint="Student / Faculty ID"/>[m
+[32m+[m
+[32m+[m[32m        <EditText[m
+[32m+[m[32m            android:id="@+id/etEmail"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:hint="Email"/>[m
+[32m+[m
+[32m+[m[32m        <Button[m
+[32m+[m[32m            android:id="@+id/btnRegister"[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:text="Register"[m
+[32m+[m[32m            android:layout_marginTop="24dp"/>[m
+[32m+[m
+[32m+[m[32m    </LinearLayout>[m
+[32m+[m
+[32m+[m[32m</ScrollView>[m
+\ No newline at end of file[m
