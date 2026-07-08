@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="csync_primary">#1565C0</color>
+
+    <color name="csync_primary_dark">#0D47A1</color>
+
+    <color name="csync_secondary">#42A5F5</color>
+
+    <color name="csync_background">#F5F7FA</color>
+
+    <color name="csync_card">#FFFFFF</color>
+
+    <color name="csync_border">#D6DDE8</color>
+
+    <color name="csync_text">#1E293B</color>
+
+    <color name="csync_hint">#64748B</color>
+
+    <color name="csync_success">#2E7D32</color>
+
+</resources>

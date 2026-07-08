@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="radius_large">20dp</dimen>
+
+    <dimen name="radius_medium">14dp</dimen>
+
+    <dimen name="radius_small">10dp</dimen>
+
+    <dimen name="padding_large">24dp</dimen>
+
+    <dimen name="padding_medium">16dp</dimen>
+
+</resources>
