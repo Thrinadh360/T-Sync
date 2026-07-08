@@ -221,11 +221,58 @@ public class CSyncRegistrationActivity extends BaseFragment {
             // Temporary
             //-------------------------
 
-            Toast.makeText(
-                    context,
-                    "Registration request prepared successfully.",
-                    Toast.LENGTH_LONG
-            ).show();
+            new Thread(() -> {
+
+    try {
+
+        org.telegram.csync.repositories.UserRepository repository =
+                new org.telegram.csync.repositories.UserRepository();
+
+        org.telegram.csync.models.RegisterResponse response =
+                repository.register(request);
+
+        fragmentView.post(() -> {
+
+            if (response != null && response.success) {
+
+                Toast.makeText(
+                        context,
+                        "Registration submitted successfully.",
+                        Toast.LENGTH_LONG
+                ).show();
+
+                // TODO:
+                // Open Waiting Approval Screen
+
+            } else {
+
+                Toast.makeText(
+                        context,
+                        response != null
+                                ? response.message
+                                : "Registration failed",
+                        Toast.LENGTH_LONG
+                ).show();
+
+            }
+
+        });
+
+    } catch (Exception e) {
+
+        fragmentView.post(() ->
+
+                Toast.makeText(
+                        context,
+                        e.getMessage(),
+                        Toast.LENGTH_LONG
+                ).show()
+
+        );
+
+    }
+
+}).start();
 
             // Next Phase:
             // UserRepository.register(request);
