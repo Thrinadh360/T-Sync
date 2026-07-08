@@ -11,6 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.telegram.csync.core.utils.DeviceInfo;
+import org.telegram.csync.core.utils.Validation;
+import org.telegram.csync.models.RegisterRequest;
 import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.BaseFragment;
 
@@ -20,6 +23,7 @@ public class CSyncRegistrationActivity extends BaseFragment {
     private EditText etMobile;
     private EditText etEmail;
     private EditText etCollegeId;
+    private EditText etCollege;
 
     private Spinner spRole;
     private Spinner spDepartment;
@@ -35,26 +39,39 @@ public class CSyncRegistrationActivity extends BaseFragment {
         fragmentView = LayoutInflater.from(context)
                 .inflate(R.layout.activity_csync_registration, null);
 
+        //-------------------------
         // EditTexts
+        //-------------------------
+
         etName = fragmentView.findViewById(R.id.etName);
         etMobile = fragmentView.findViewById(R.id.etMobile);
         etEmail = fragmentView.findViewById(R.id.etEmail);
         etCollegeId = fragmentView.findViewById(R.id.etCollegeId);
+        etCollege = fragmentView.findViewById(R.id.etCollege);
 
+        //-------------------------
         // Spinners
+        //-------------------------
+
         spRole = fragmentView.findViewById(R.id.spRole);
         spDepartment = fragmentView.findViewById(R.id.spDepartment);
         spYear = fragmentView.findViewById(R.id.spYear);
 
-        // Device
+        //-------------------------
+        // Device Text
+        //-------------------------
+
         txtDevice = fragmentView.findViewById(R.id.txtDevice);
 
-        // Button
+        //-------------------------
+        // Register Button
+        //-------------------------
+
         btnRegister = fragmentView.findViewById(R.id.btnRegister);
 
-        // -----------------------
+        //------------------------------------------------
         // Role Spinner
-        // -----------------------
+        //------------------------------------------------
 
         String[] roles = {
                 "Student",
@@ -75,9 +92,9 @@ public class CSyncRegistrationActivity extends BaseFragment {
 
         spRole.setAdapter(roleAdapter);
 
-        // -----------------------
+        //------------------------------------------------
         // Department Spinner
-        // -----------------------
+        //------------------------------------------------
 
         String[] departments = {
                 "Computer Science",
@@ -85,27 +102,31 @@ public class CSyncRegistrationActivity extends BaseFragment {
                 "Commerce",
                 "Physics",
                 "Chemistry",
-                "Mathematics"
+                "Mathematics",
+                "English",
+                "Other"
         };
 
-        ArrayAdapter<String> deptAdapter =
+        ArrayAdapter<String> departmentAdapter =
                 new ArrayAdapter<>(
                         context,
                         android.R.layout.simple_spinner_dropdown_item,
                         departments
                 );
 
-        spDepartment.setAdapter(deptAdapter);
+        spDepartment.setAdapter(departmentAdapter);
 
-        // -----------------------
+        //------------------------------------------------
         // Year Spinner
-        // -----------------------
+        //------------------------------------------------
 
         String[] years = {
                 "I Year",
                 "II Year",
                 "III Year",
-                "PG"
+                "PG",
+                "Faculty",
+                "Staff"
         };
 
         ArrayAdapter<String> yearAdapter =
@@ -117,16 +138,16 @@ public class CSyncRegistrationActivity extends BaseFragment {
 
         spYear.setAdapter(yearAdapter);
 
-        // -----------------------
-        // Device Info
-        // -----------------------
+        //------------------------------------------------
+        // Device Information
+        //------------------------------------------------
 
         String deviceName = Build.MANUFACTURER + " " + Build.MODEL;
         txtDevice.setText(deviceName);
 
-        // -----------------------
+        //------------------------------------------------
         // Register Button
-        // -----------------------
+        //------------------------------------------------
 
         btnRegister.setOnClickListener(v -> {
 
@@ -134,54 +155,80 @@ public class CSyncRegistrationActivity extends BaseFragment {
             String mobile = etMobile.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
             String collegeId = etCollegeId.getText().toString().trim();
+            String college = etCollege.getText().toString().trim();
 
             String role = spRole.getSelectedItem().toString();
             String department = spDepartment.getSelectedItem().toString();
             String year = spYear.getSelectedItem().toString();
 
-            if (name.isEmpty()) {
+            //-------------------------
+            // Validation
+            //-------------------------
+
+            if (Validation.isEmpty(name)) {
                 etName.setError("Enter your full name");
                 etName.requestFocus();
                 return;
             }
 
-            if (mobile.length() != 10) {
-                etMobile.setError("Enter a valid 10-digit mobile number");
+            if (!Validation.isValidMobile(mobile)) {
+                etMobile.setError("Enter a valid mobile number");
                 etMobile.requestFocus();
                 return;
             }
 
-            if (email.isEmpty()) {
-                etEmail.setError("Enter your email");
+            if (!Validation.isValidEmail(email)) {
+                etEmail.setError("Enter a valid email");
                 etEmail.requestFocus();
                 return;
             }
 
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                etEmail.setError("Invalid email address");
-                etEmail.requestFocus();
-                return;
-            }
-
-            if (collegeId.isEmpty()) {
+            if (Validation.isEmpty(collegeId)) {
                 etCollegeId.setError("Enter Student / Employee ID");
                 etCollegeId.requestFocus();
                 return;
             }
 
-            String message =
-                    "Registration Details\n\n" +
-                            "Name: " + name +
-                            "\nRole: " + role +
-                            "\nDepartment: " + department +
-                            "\nYear: " + year +
-                            "\nDevice: " + deviceName;
+            if (Validation.isEmpty(college)) {
+                etCollege.setError("Enter College Name");
+                etCollege.requestFocus();
+                return;
+            }
 
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+            //-------------------------
+            // Create Request Object
+            //-------------------------
 
-            // TODO:
-            // Call C-Sync Registration API here.
-            // POST https://api.csync.top/api/register
+            RegisterRequest request = new RegisterRequest();
+
+            request.fullName = name;
+            request.mobile = mobile;
+            request.email = email;
+
+            request.collegeId = collegeId;
+
+            request.role = role;
+            request.department = department;
+            request.year = year;
+
+            request.deviceId = DeviceInfo.getAndroidId(context);
+            request.deviceName = DeviceInfo.getDeviceName();
+
+            request.platform = DeviceInfo.getPlatform();
+            request.appVersion = "1.0";
+
+            //-------------------------
+            // Temporary
+            //-------------------------
+
+            Toast.makeText(
+                    context,
+                    "Registration request prepared successfully.",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            // Next Phase:
+            // UserRepository.register(request);
         });
 
         return fragmentView;

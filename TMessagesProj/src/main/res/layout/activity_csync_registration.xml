@@ -92,6 +92,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textStyle="bold"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="College"/>
+
+<EditText
+    android:id="@+id/etCollege"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="College Name"/>
 
         <Button
             android:id="@+id/btnRegister"
